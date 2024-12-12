@@ -34,72 +34,65 @@ Un *match* è una partita tra due mostriciattoli, in cui il giocatore e l'IA si 
 
 Le *mosse* sono associate ai tipi elementali dei mostriciattoli e i loro effetti variano in base al tipo del mostriciattolo avversario (es. una mossa di tipo fuoco sarà più efficace contro un mostriciattolo di tipo erba). Ogni mossa è caratterizzata da un nome, un tipo e un effetto specifico.
 
-```
-@startuml
-class PocketMonster {
-    - name: String
-    - types: Type[]
-    - healthPoints: int
-    - attackPoints: int
-    - defensePoints: int
-    + attack(opponent: PocketMonster, move: Move): void
-    + receiveDamage(damage: int): void
+```mermaid
+classDiagram
+class Monster {
+    name: String
+    healthPoints: int
+    attackPoints: int
+    defensePoints: int
+    updateHealth(damage: int): void
+    updateAttack(attack: int): void
+    updateDefense(defense: int): void
+}
+
+class Stats {
+    healthPoints: int
+    attackPoints: int
+    defensePoints: int
 }
 
 class Type {
-    - name: String
+    -name: String
 }
-
 class Tool {
-    - name: String
-    - description: String
-    + applyEffect(pocketMonster: PocketMonster): void
+    -name: String
+}
+class SingleUseTool {
+    -name: String
+    +use(pocketMonster: Monster): void
 }
 
-class SpecialTool {
-    - name: String
-    - description: String
-    + applyPermanentEffect(pocketMonster: PocketMonster): void
+class EquipableTool {
+    +equip(pocketMonster: Monster): void
 }
-
 class Move {
-    - name: String
-    - type: Type
-    - description: String
-    + calculateDamage(attacker: PocketMonster, defender: PocketMonster): int
+    -name: String
+    -type: Type
+    -description: String
+    +getName(): String
 }
-
 class Match {
-    - player: PocketMonster
-    - opponent: PocketMonster
-    + startMatch(): void
-    + executeTurn(move: Move): void
-    + endMatch(): void
+    +start(): void
 }
-
 class Player {
-    - name: String
-    + chooseMove(): Move
+    +chooseMove(opponent: Monster, player: Monster): Move
+}
+class DamageStrategy {
+    +calculateDamage(attacker: Monster, move: Move, defender: Monster): int
 }
 
-class AI {
-    + chooseMove(opponent: PocketMonster): Move
-}
-
-PocketMonster "1" -- "*" Type : has
-PocketMonster "1" -- "*" Move : knows
-PocketMonster "1" *-- "0..1" SpecialTool : equippedWith
-Match "1" -- "1" PocketMonster : player
-Match "1" -- "1" PocketMonster : opponent
+Monster "1" -- "*" Type : has
+Monster "1" -- "*" Move : knows
+Monster "1" -- "*" Stats : equippedWith
+Monster "1" -- "0..1" SingleUseTool : uses
+Monster "1" -- "0..1" EquipableTool : equipped
+Match "1" -- "1" Monster : monsterPlayer
+Match "1" -- "1" Monster : monsterOpponent
+Match "1" -- "1" DamageStrategy : damageStrategy
+Tool <|-- SingleUseTool
+Tool <|-- EquipableTool
+Player <|-- AI
 Player -- Match
 AI -- Match
-
-note "Load from file (RNF1)" as N1
-PocketMonster .. N1
-
-note "Combat logic (RF5)" as N2
-Move .. N2
-Type .. N2
-
-@enduml
 ```
