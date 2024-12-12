@@ -53,24 +53,23 @@ class Stats {
 }
 
 class Type {
-    -name: String
+    name: String
 }
 class Tool {
-    -name: String
+    name: String
 }
 class SingleUseTool {
-    -name: String
-    +use(pocketMonster: Monster): void
+    name: String
 }
 
 class EquipableTool {
-    +equip(pocketMonster: Monster): void
+    equip(pocketMonster: Monster): void
 }
 class Move {
-    -name: String
-    -type: Type
-    -description: String
-    +getName(): String
+    name: String
+    type: Type
+    description: String
+    name(): String
 }
 class Match {
     +start(): void
