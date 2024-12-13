@@ -126,8 +126,8 @@ public class MonsterBuilder {
         if (this.type == null) {
             throw new IllegalStateException("Type cannot be null");
         }
-        if (this.moves.size() != 4) {
-            throw new IllegalStateException("Moves must be exactly 4");
+        if (this.moves.size() > 4) {
+            throw new IllegalStateException("Moves must be less than 4");
         }
     }
 }

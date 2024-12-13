@@ -23,13 +23,6 @@ public interface MonsterRender {
     int getHealth();
 
     /**
-     * Gets the list of moves of the monster.
-     *
-     * @return the list of moves
-     */
-    List<Move> getMoves();
-
-    /**
      * Creates a MonsterRender instance from a given Monster.
      *
      * @param monster the monster to create the render from
@@ -45,11 +38,6 @@ public interface MonsterRender {
             @Override
             public int getHealth() {
                 return monster.getHealth();
-            }
-
-            @Override
-            public List<Move> getMoves() {
-                return monster.getMoves();
             }
         };
     }

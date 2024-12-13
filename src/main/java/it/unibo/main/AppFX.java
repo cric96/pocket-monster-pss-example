@@ -9,6 +9,7 @@ import it.unibo.core.monster.MonsterBuilder;
 import it.unibo.core.monster.Move;
 import it.unibo.core.monster.TypeEnum;
 import it.unibo.core.tool.SmallPotion;
+import it.unibo.view.MonsterRender;
 import it.unibo.view.fx.MatchViewFX;
 import javafx.application.Application;
 import javafx.stage.Stage;
@@ -52,6 +53,7 @@ public class AppFX extends Application {
         final var match = new MatchImpl(pika, charmender, List.of(potion), new BaseStrategy(), player1, view);
         view.attachObserver(match);
         match.start();
+        
     }
 
     static void run(final String[] args) {
