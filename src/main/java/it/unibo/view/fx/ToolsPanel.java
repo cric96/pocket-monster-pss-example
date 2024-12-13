@@ -3,7 +3,6 @@ package it.unibo.view.fx;
 import it.unibo.view.MatchViewObserver;
 import javafx.scene.Node;
 import javafx.scene.control.Button;
-import javafx.scene.layout.GridPane;
 import javafx.scene.layout.HBox;
 
 import java.util.List;

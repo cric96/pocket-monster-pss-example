@@ -1,6 +1,5 @@
 package it.unibo.view.fx;
 
-import it.unibo.controller.Match;
 import it.unibo.view.MatchView;
 import it.unibo.view.MatchViewObserver;
 import it.unibo.view.MonsterRender;
